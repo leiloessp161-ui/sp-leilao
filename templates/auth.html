@@ -1,13 +1,12 @@
 {% extends "base.html" %}{% block body %}
 <div class="card pad" style="max-width:480px;margin:10px auto">
-{% if mode=='cadastro' %}<h1 style="margin-top:0;font-size:1.5rem;letter-spacing:-.02em">Criar conta</h1><p class="muted">Preencha seus dados para se cadastrar e participar dos leilões.</p>
+{% if mode=='cadastro' %}<h1 style="margin-top:0;font-size:1.5rem;letter-spacing:-.02em">Criar conta</h1><p class="muted">Preencha seus dados para se cadastrar. Após o cadastro você já pode participar dos leilões.</p>
 <form method="post"><input type="hidden" name="csrf" value="{{csrf()}}">
 <label>Nome completo</label><input name="nome" required value="{{f.get('nome','')}}" placeholder="Seu nome completo">
 <label>CPF</label><input name="cpf" required value="{{f.get('cpf','')}}" placeholder="000.000.000-00" maxlength="14" inputmode="numeric">
 <label>CEP</label><input name="cep" required value="{{f.get('cep','')}}" placeholder="00000-000" maxlength="9" inputmode="numeric" id="cep">
 <label>Endereço (rua)</label><input name="street" required value="{{f.get('street','')}}" placeholder="Nome da rua" id="street">
-<label>Número</label><input name="number" required value="{{f.get('number','')}}" placeholder="Número da residência">
-<label>Complemento (opcional)</label><input name="complement" value="{{f.get('complement','')}}" placeholder="Apto, bloco, etc.">
+<label>Número</label><input name="number" required value="{{f.get('number','')}}" placeholder="Número">
 <label>E-mail</label><input name="email" type="email" required value="{{f.get('email','')}}">
 <label>Senha (mín. 6 caracteres)</label><input name="senha" type="password" required minlength="6">
 <label style="font-weight:400;display:flex;gap:8px;align-items:flex-start"><input type="checkbox" name="aceite" value="1" style="width:auto;margin-top:4px"> <span>Li e aceito as <a href="/condicoes" target="_blank">Condições de uso</a> e a <a href="/condicoes#privacidade" target="_blank">Política de privacidade</a>.</span></label>
@@ -24,11 +23,10 @@ document.getElementById('cep').addEventListener('blur', async function(){
 });
 </script>
 {% elif mode=='codigo' %}<h1 style="margin-top:0;font-size:1.5rem;letter-spacing:-.02em">Confirmação em dois passos</h1>
-<p class="muted">Abra o app autenticador no celular (Google Authenticator, Microsoft Authenticator, Authy…) e digite o código de 6 dígitos da SP Leilões.</p>
+<p class="muted">Abra o app autenticador no celular e digite o código de 6 dígitos.</p>
 <form method="post"><input type="hidden" name="csrf" value="{{csrf()}}">
 <label>Código</label><input name="codigo" inputmode="numeric" autocomplete="one-time-code" autofocus required maxlength="20" placeholder="000000" style="font-size:1.4rem;letter-spacing:.3em;text-align:center">
 <p><button class="btn lg w">Confirmar</button></p></form>
-<p class="muted" style="font-size:.9rem">Perdeu o celular? Digite um dos <b>códigos de recuperação</b> (formato XXXX-XXXX-XXXX) no campo acima.</p>
 <p class="muted" style="text-align:center"><a href="/entrar">Voltar</a></p>
 {% else %}<h1 style="margin-top:0;font-size:1.5rem;letter-spacing:-.02em">Entrar</h1>
 <form method="post"><input type="hidden" name="csrf" value="{{csrf()}}">
